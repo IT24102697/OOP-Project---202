@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tour Management - Home</title>
+    <style>
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        a {
+            display: inline-block;
+            margin: 15px;
+            padding: 14px 28px;
+            text-decoration: none;
+            background-color: #4054B2; /* Your chosen blue color */
+            color: white;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        a:hover {
+            background-color: #2e3d88;
+            transform: translateY(-3px);
+        }
+    </style>
+
+</head>
+<body>
+
+<h1>Welcome to Tour Management System</h1>
+
+<!-- Danger from here to down -->
+
+<a href="/viewTours">View All Tours</a>
+<a href="/addTour">Add New Tour</a>
+
+</body>
+</html>
