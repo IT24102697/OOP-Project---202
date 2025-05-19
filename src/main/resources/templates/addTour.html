@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customize Your Tour</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            max-width: 950px;
+            margin: 60px auto;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.25);
+        }
+        h2 {
+            text-align: center;
+            color: #004080;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #4054B2; /* your theme color */
+        }
+
+        .destination-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .destination-group label {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .destination-group input[type="checkbox"] {
+            margin-right: 8px;
+            accent-color: #4054B2; /* modern checkbox color */
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .checkbox-group label {
+            font-weight: normal;
+            width: auto;
+        }
+        .destination-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Customize Your Tour</h2>
+    <form th:action="@{/submitCustomizeTour}" method="post">
+
+    <div class="form-group">
+            <div style="flex: 1;">
+                <label>Title *</label>
+                <select name="title" required>
+                    <option value="">Select</option>
+                    <option>Mr.</option>
+                    <option>Ms.</option>
+                    <option>Mrs.</option>
+                </select>
+            </div>
+
+            <div style="flex: 2;">
+                <label>Name *</label>
+                <input type="text" name="name" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div style="flex: 1;">
+                <label>Email Address *</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div style="flex: 1;">
+                <label>Telephone Number</label>
+                <input type="text" name="phone">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div style="flex: 1;">
+                <label>Country *</label>
+                <select name="country" required>
+                    <option value="">Select</option>
+                    <option>USA</option>
+                    <option>UK</option>
+                    <option>India</option>
+                    <option>Australia</option>
+                </select>
+            </div>
+
+            <div style="flex: 1;">
+                <label>Pickup Place *</label>
+                <input type="text" name="pickup" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div style="flex: 1;">
+                <label>Arrival Date *</label>
+                <input type="date" name="arrival_date" required>
+            </div>
+            <div style="flex: 1;">
+                <label>Departure Date *</label>
+                <input type="date" name="departure_date" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div style="flex: 1;">
+                <label>Tour Duration (Days) *</label>
+                <input type="number" name="duration" min="1" required>
+            </div>
+
+            <div style="flex: 1;">
+                <label>Vehicle Type *</label>
+                <select name="vehicle" required>
+                    <option value="">Select</option>
+                    <option>Car</option>
+                    <option>Van</option>
+                    <option>Bus</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div style="flex: 1;">
+                <label>Number of Adults *</label>
+                <input type="number" name="adults" min="1" required>
+            </div>
+
+            <div style="flex: 1;">
+                <label>Number of Children</label>
+                <input type="number" name="children" min="0">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div style="flex: 1;">
+                <label>Type of Accommodation *</label>
+                <select name="accommodation" required>
+                    <option value="">Select</option>
+                    <option>3-Star</option>
+                    <option>4-Star</option>
+                    <option>5-Star</option>
+                </select>
+            </div>
+
+            <div style="flex: 1;">
+                <label>Budget per Day *</label>
+                <input type="number" name="budget" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Age Group of Children</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="age_group" value="0-5"> 0 - 5</label>
+                <label><input type="checkbox" name="age_group" value="6-12"> 6 - 12</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Preferred Destinations *</label>
+            <div class="destination-group">
+                <label><input type="checkbox" name="destinations" value="Tissamaharama"> Tissamaharama</label>
+                <label><input type="checkbox" name="destinations" value="Colombo"> Colombo</label>
+                <label><input type="checkbox" name="destinations" value="Kandy"> Kandy</label>
+                <label><input type="checkbox" name="destinations" value="Galle"> Galle</label>
+                <label><input type="checkbox" name="destinations" value="Sigiriya"> Sigiriya</label>
+                <label><input type="checkbox" name="destinations" value="Ella"> Ella</label>
+                <label><input type="checkbox" name="destinations" value="Anuradhapura"> Anuradhapura</label>
+                <label><input type="checkbox" name="destinations" value="Polonnaruwa"> Polonnaruwa</label>
+                <label><input type="checkbox" name="destinations" value="Trincomalee"> Trincomalee</label>
+                <label><input type="checkbox" name="destinations" value="Jaffna"> Jaffna</label>
+                <label><input type="checkbox" name="destinations" value="Nuwara Eliya"> Nuwara Eliya</label>
+                <label><input type="checkbox" name="destinations" value="Bentota"> Bentota</label>
+                <label><input type="checkbox" name="destinations" value="Negombo"> Negombo</label>
+                <label><input type="checkbox" name="destinations" value="Mirissa"> Mirissa</label>
+                <label><input type="checkbox" name="destinations" value="Arugam Bay"> Arugam Bay</label>
+                <label><input type="checkbox" name="destinations" value="Dambulla"> Dambulla</label>
+                <label><input type="checkbox" name="destinations" value="Matara"> Matara</label>
+                <label><input type="checkbox" name="destinations" value="Udawalawe"> Udawalawe</label>
+                <label><input type="checkbox" name="destinations" value="Yala"> Yala</label>
+                <label><input type="checkbox" name="destinations" value="Hikkaduwa"> Hikkaduwa</label>
+                <label><input type="checkbox" name="destinations" value="Kalutara"> Kalutara</label>
+                <label><input type="checkbox" name="destinations" value="Hambantota"> Hambantota</label>
+                <label><input type="checkbox" name="destinations" value="Pinnawala"> Pinnawala</label>
+                <label><input type="checkbox" name="destinations" value="Kitulgala"> Kitulgala</label>
+                <label><input type="checkbox" name="destinations" value="Haputale"> Haputale</label>
+            </div>
+        </div>
+
+        <button type="submit">Submit Customization</button>
+    </form>
+</div>
+
+</body>
+</html>
