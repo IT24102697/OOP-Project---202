@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Travel Package</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+
+        .page-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #4054B2;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="number"] {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 14px;
+            background-color: #4054B2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #2f3fa3;
+        }
+
+        .form-container a {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #4054B2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-container a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <form class="form-container" th:action="@{/admin/package/add}" method="post">
+        <h2>Add New Package</h2>
+
+        <input type="text" name="name" placeholder="Package Name" required />
+        <input type="text" name="description" placeholder="Description" required />
+        <input type="number" name="cost" placeholder="Cost" step="0.01" required />
+
+        <!-- ✅ NEW: Image Path Input -->
+        <input type="text" name="imagePath" placeholder="Image File (e.g. beach.jpg)" required />
+
+        <button type="submit">Add Package</button>
+        <a th:href="@{/admin/packages}">Back</a>
+    </form>
+</div>
+</body>
+</html>
