@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Your Feedback</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('/images/beach.jpg') no-repeat center center fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 32px 28px;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(64, 84, 178, 0.2);
+            width: 100%;
+            max-width: 420px;
+        }
+
+        h2 {
+            margin-bottom: 24px;
+            text-align: center;
+            color: #4054B2;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4054B2;
+            box-shadow: 0 0 5px rgba(64, 84, 178, 0.5);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            margin-top: 28px;
+            width: 100%;
+            padding: 14px 0;
+            background-color: #4054B2;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2e3c99;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 18px;
+            text-align: center;
+            color: #4054B2;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<form class="form-container" th:action="@{/feedback/update}" method="post">
+    <h2>Edit Your Feedback</h2>
+    <input type="hidden" name="id" th:value="${feedback.id}" />
+
+    <label for="username">Username</label>
+    <input id="username" type="text" name="username" th:value="${feedback.username}" required />
+
+    <label for="comment">Comment</label>
+    <textarea id="comment" name="comment" required th:text="${feedback.comment}"></textarea>
+
+    <button type="submit">Update</button>
+
+    <a class="back-link" th:href="@{'/feedback/view/' + ${feedback.username}}">← Back to Feedback</a>
+</form>
+</body>
+</html>
