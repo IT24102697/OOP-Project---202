@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Contact Message</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="page-wrapper">
+    <form class="form-container" th:action="@{/admin/contact/update}" method="post">
+        <h2>Edit Contact Message</h2>
+
+        <!-- Hidden ID -->
+        <input type="hidden" name="id" th:value="${message.id}" />
+
+        <!-- Name -->
+        <label for="name">Name:</label>
+        <input type="text" name="name" th:value="${message.name}" required />
+
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" name="email" th:value="${message.email}" required />
+
+        <!-- Message -->
+        <label for="message">Message:</label>
+        <textarea name="message" rows="4" required
+                  th:text="${message.message}"></textarea>
+
+        <!-- Buttons -->
+        <button type="submit">Update</button>
+        <a th:href="@{/admin/contacts}">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
