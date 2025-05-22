@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Available Packages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            text-align: center;
+            color: #4054B2;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        thead {
+            background-color: #4054B2;
+            color: #fff;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th:nth-child(1), td:nth-child(1) {
+            width: 30%;
+        }
+
+        th:nth-child(2), td:nth-child(2),
+        th:nth-child(3), td:nth-child(3),
+        th:nth-child(4), td:nth-child(4) {
+            width: 17%;
+        }
+
+        th:nth-child(5), td:nth-child(5) {
+            width: 19%;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f5ff;
+        }
+
+        img.package-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-book {
+            background-color: #4054B2;
+            color: #fff;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-book:hover {
+            background-color: #2f3fa3;
+        }
+
+        .back-link {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #4054B2;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .back-link:hover {
+            background-color: #2f3fa3;
+        }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 20px;
+                background: #eef2ff;
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            td {
+                background: none !important;
+                padding: 8px 10px;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            img.package-image {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Available Travel Packages</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Cost</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pkg : ${packages}">
+            <td><img th:src="@{'/images/' + ${pkg.imagePath}}" alt="Package Image" class="package-image"></td>
+            <td th:text="${pkg.name}" data-label="Name"></td>
+            <td th:text="${pkg.description}" data-label="Description"></td>
+            <td th:text="${pkg.cost}" data-label="Cost"></td>
+            <td>
+                <form th:action="@{/packages/book}" method="post">
+                    <input type="hidden" name="id" th:value="${pkg.id}" />
+                    <input type="hidden" name="username" th:value="${username}" />
+                    <button type="submit" class="btn-book">Book Now</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="back-link" th:href="@{/}">← Back to Home</a>
+</div>
+</body>
+</html>
