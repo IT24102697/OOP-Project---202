@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your Feedback</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('/images/beach.jpg') no-repeat center center fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px;
+        }
+
+        .dashboard {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .dashboard h2 {
+            color: #4054B2;
+            margin-bottom: 20px;
+        }
+
+        .feedback-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .feedback-table th, .feedback-table td {
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .feedback-table th {
+            background-color: #4054B2;
+            color: #fff;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            text-decoration: none;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 2px;
+        }
+
+        .btn.edit {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn.delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn.back {
+            background-color: #4054B2;
+            color: white;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="dashboard">
+        <h2>Your Feedback</h2>
+        <table class="feedback-table">
+            <thead>
+            <tr><th>ID</th><th>Comment</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="fb : ${feedbacks}">
+                <td th:text="${fb.id}"></td>
+                <td th:text="${fb.comment}"></td>
+                <td>
+                    <a th:href="@{'/feedback/edit/' + ${fb.id}}" class="btn edit">Edit</a>
+                    <form th:action="@{/feedback/delete}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${fb.id}" />
+                        <input type="hidden" name="username" th:value="${username}" />
+                        <button type="submit" class="btn delete">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/}" class="btn back">Back to Home</a>
+    </div>
+</div>
+</body>
+</html>
