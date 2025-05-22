@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f8;
+            color: #4054B2;
+            padding: 20px;
+        }
+
+        .page-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #4054B2;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2e3f8e;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #4054B2;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <form class="form-container" th:action="@{/contact/update}" method="post">
+        <h2>Edit Contact Message</h2>
+        <input type="hidden" name="id" th:value="${message.id}" />
+        <input type="text" name="name" placeholder="Enter your name" th:value="${message.name}" required />
+        <input type="email" name="email" placeholder="Enter your email" th:value="${message.email}" required />
+        <textarea name="message" rows="4" placeholder="Enter your message" required th:text="${message.message}"></textarea>
+        <button type="submit">Update</button>
+    </form>
+
+    <form class="form-container" th:action="@{/contact/delete}" method="post" style="margin-top: 10px;">
+        <input type="hidden" name="id" th:value="${message.id}" />
+        <input type="hidden" name="name" th:value="${message.name}" />
+        <button type="submit">Delete</button>
+    </form>
+
+    <a th:href="@{'/contact/view/' + ${message.name}}">Back</a>
+</div>
+</body>
+</html>
